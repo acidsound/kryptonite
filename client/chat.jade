@@ -1,0 +1,39 @@
+template(name="chat")
+	.틀
+		.행
+			.열.칸1-5
+				| Room List
+				dl.rooms
+					dt
+						button#btn-create-room create
+					+each rooms
+						dt.떨어져
+							.오른쪽착
+								a.room(href="#" rid="{{_id}}") {{name}}
+								a.remove(href="#") x
+			.열.칸4-5
+				.lobby.떨어져
+					if roomId
+						span.왼쪽착
+							| room: {{room.name}}
+						span.오른쪽착
+							a#leave(herf="#")
+								| leave
+						form.message(action="#")
+							input(name="message" type="text" placeholder="tell me something...")
+						dl.chats
+							+each chats
+								if isMine
+									dt
+										.떨어져
+											div.왼쪽착
+												sub {{name}}
+										.떨어져
+											div.왼쪽착 {{message}}
+								else
+									dt
+										.떨어져
+											div.오른쪽착
+												sub {{name}}
+										.떨어져
+											div.오른쪽착 {{message}}
