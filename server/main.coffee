@@ -2,17 +2,16 @@
 Meteor.startup ->
 	console.log "server initiated"
 Meteor.methods
-	"room.add": ->
+	"room.add": ( roomId = chance.word length:6)->
 		check @userId, String
 		Rooms.insert
-			name: chance.word length:6
+			name: roomId
 			createdAt: Date.now()
 	"room.remove": ({_id})->
 		check @userId, String
 		check _id, String
 		Rooms.remove _id
 	"chat.add": ({roomId, message})->
-		console.log roomId, message
 		check @userId, String
 		check roomId, String
 		check message, String
